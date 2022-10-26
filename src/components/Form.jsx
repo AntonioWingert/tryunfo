@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 
 export default class Form extends Component {
   render() {
@@ -112,3 +113,33 @@ export default class Form extends Component {
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string,
+  cardDescription: PropTypes.string,
+  cardAttr1: PropTypes.number,
+  cardAttr2: PropTypes.number,
+  cardAttr3: PropTypes.number,
+  cardImage: PropTypes.string,
+  cardRare: PropTypes.bool,
+  cardTrunfo: PropTypes.bool,
+  hasTrunfo: PropTypes.string,
+  isSaveButtonDisabled: PropTypes.func,
+  onInputChange: PropTypes.func,
+  onSaveButtonClick: PropTypes.func,
+};
+
+Form.defaultProps = {
+  cardName: '',
+  cardDescription: '',
+  cardAttr1: '',
+  cardAttr2: '',
+  cardAttr3: '',
+  cardImage: '',
+  cardRare: '',
+  cardTrunfo: '',
+  hasTrunfo: '',
+  isSaveButtonDisabled: '',
+  onInputChange: '',
+  onSaveButtonClick: '',
+};
