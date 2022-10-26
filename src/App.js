@@ -104,6 +104,19 @@ class App extends React.Component {
     });
   };
 
+  removeCard = (cardName) => {
+    const { storedCards } = this.state;
+    const filteredCards = storedCards
+      .filter((card) => card.cardName !== cardName);
+    this.setState(
+      {
+        storedCards: filteredCards },
+      () => {
+        this.isTrunfo();
+      },
+    );
+  };
+
   render() {
     const {
       cardName,
@@ -146,17 +159,18 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         {
-          storedCards.map((cart) => (
+          storedCards.map((card) => (
             <Card
-              key={ cart.cardName }
-              cardName={ cart.cardName }
-              cardDescription={ cart.cardDescription }
-              cardAttr1={ cart.cardAttr1 }
-              cardAttr2={ cart.cardAttr2 }
-              cardAttr3={ cart.cardAttr3 }
-              cardImage={ cart.cardImage }
-              cardRare={ cart.cardRare }
-              cardTrunfo={ cart.cardTrunfo }
+              key={ card.cardName }
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+              removeCard={ this.removeCard }
             />
           ))
         }
