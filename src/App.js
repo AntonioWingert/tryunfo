@@ -3,17 +3,22 @@ import Card from './components/Card';
 import Form from './components/Form';
 
 class App extends React.Component {
-  state = {
+  initialState = {
     cardName: '',
     cardDescription: '',
     cardAttr1: 0,
     cardAttr2: 0,
     cardAttr3: 0,
     cardImage: '',
-    cardRare: '',
-    cardTrunfo: '',
+    cardRare: 'normal',
+    cardTrunfo: false,
     hasTrunfo: false,
     isSaveButtonDisabled: true,
+  };
+
+  state = {
+    ...this.initialState,
+    storedCards: [],
   };
 
   validateTxt = () => {
@@ -63,6 +68,35 @@ class App extends React.Component {
     });
   };
 
+  saveState = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      storedCards,
+    } = this.state;
+
+    const card = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    this.setState({
+      ...this.initialState,
+      storedCards: [...storedCards, card],
+    });
+  };
+
   render() {
     const {
       cardName,
@@ -91,7 +125,7 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
-          onSaveButtonClick={ cardName }
+          onSaveButtonClick={ this.saveState }
         />
         <Card
           cardName={ cardName }
