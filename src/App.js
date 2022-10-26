@@ -68,6 +68,11 @@ class App extends React.Component {
     });
   };
 
+  isTrunfo = () => {
+    const { storedCards } = this.state;
+    this.setState({ hasTrunfo: storedCards.some((card) => card.cardTrunfo) });
+  };
+
   saveState = () => {
     const {
       cardName,
@@ -94,6 +99,8 @@ class App extends React.Component {
     this.setState({
       ...this.initialState,
       storedCards: [...storedCards, card],
+    }, () => {
+      this.isTrunfo();
     });
   };
 
@@ -109,6 +116,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      // storedCards,
     } = this.state;
     return (
       <div>
