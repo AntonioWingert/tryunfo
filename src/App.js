@@ -172,8 +172,7 @@ class App extends React.Component {
       return storedCards;
     };
     return (
-      <div>
-        <h1>Tryunfo </h1>
+      <div className="flex flex-wrap justify-center mt-20">
         <Form
           cardName={ cardName }
           cardDescription={ cardDescription }
