@@ -50,7 +50,7 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  removeCard: PropTypes.func,
+  removeCard: PropTypes.bool,
 };
 
 Card.defaultProps = {

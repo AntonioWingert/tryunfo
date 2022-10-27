@@ -14,6 +14,9 @@ class App extends React.Component {
     cardTrunfo: false,
     hasTrunfo: false,
     isSaveButtonDisabled: true,
+    filterName: '',
+    filterRarity: '',
+    filterTrunfo: false,
   };
 
   state = {
@@ -117,6 +120,33 @@ class App extends React.Component {
     );
   };
 
+  filterTrunfoCard = () => {
+    const { storedCards } = this.state;
+    return storedCards
+      .filter((card) => card.cardTrunfo === true);
+  };
+
+  filterCard = () => {
+    const { storedCards, filterName, filterRarity } = this.state;
+    if (filterRarity === 'todas') return storedCards;
+    let cardFiltered;
+    if (filterName && filterRarity) {
+      cardFiltered = storedCards
+        .filter((card) => card.cardName
+          .split(' ').includes(filterName) && card.cardRare === filterRarity);
+    }
+    if (filterName) {
+      cardFiltered = storedCards
+        .filter((card) => card.cardName
+          .split(' ').includes(filterName));
+    }
+    if (filterRarity) {
+      cardFiltered = storedCards
+        .filter((card) => card.cardRare === filterRarity);
+    }
+    return cardFiltered;
+  };
+
   render() {
     const {
       cardName,
@@ -130,7 +160,17 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
       storedCards,
+      filterName,
+      filterRarity,
+      filterTrunfo,
     } = this.state;
+
+    const renderArray = () => {
+      if (filterTrunfo) return this.filterTrunfoCard();
+      const storedFilteredCards = this.filterCard();
+      if (filterName || filterRarity) return storedFilteredCards;
+      return storedCards;
+    };
     return (
       <div>
         <h1>Tryunfo </h1>
@@ -158,8 +198,37 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <input
+          type="text"
+          data-testid="name-filter"
+          name="filterName"
+          value={ filterName }
+          onChange={ this.onInputChange }
+          disabled={ filterTrunfo }
+        />
+        <select
+          data-testid="rare-filter"
+          onChange={ this.onInputChange }
+          value={ filterRarity }
+          name="filterRarity"
+          disabled={ filterTrunfo }
+        >
+          <option value="normal"> Normal</option>
+          <option value="raro"> Raro</option>
+          <option value="muito raro"> Muito Raro</option>
+          <option value="todas"> Todas</option>
+        </select>
+        <label htmlFor="trunfo-input">
+          <input
+            type="checkbox"
+            data-testid="trunfo-filter"
+            onChange={ this.onInputChange }
+            name="filterTrunfo"
+            checked={ filterTrunfo }
+          />
+        </label>
         {
-          storedCards.map((card) => (
+          renderArray().map((card) => (
             <Card
               key={ card.cardName }
               cardName={ card.cardName }
@@ -178,5 +247,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;
