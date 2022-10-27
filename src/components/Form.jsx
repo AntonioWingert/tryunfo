@@ -18,8 +18,12 @@ export default class Form extends Component {
       onSaveButtonClick } = this.props;
 
     return (
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm m-10">
         <form className="shadown-md bg-white rounded px-8 pt-6 pb-8 mb-4">
+          <p className="block text-gray-700 font-bold mb-2 text-xl text-center">
+            Adicione sua Carta
+
+          </p>
           <label
             htmlFor="name-input"
             className="block text-gray-700 font-bold mb-2"

@@ -16,26 +16,79 @@ export default class Card extends Component {
     } = this.props;
 
     return (
-      <main>
-        <p data-testid="name-card">{cardName}</p>
-        <img src={ cardImage } alt="Nome da carta" data-testid="image-card" />
-        <p data-testid="description-card">{cardDescription}</p>
-        <p data-testid="attr1-card">{cardAttr1}</p>
-        <p data-testid="attr2-card">{cardAttr2}</p>
-        <p data-testid="attr3-card">{cardAttr3}</p>
-        <p data-testid="rare-card">{ cardRare }</p>
-        {cardTrunfo && <p data-testid="trunfo-card">Super Trunfo</p>}
-        {
-          removeCard && (
-            <button
-              data-testid="delete-button"
-              type="submit"
-              onClick={ () => removeCard(cardName) }
-            >
-              Excluir
+      <main className="w-full max-w-sm m-10">
+        <div className="shadown-md bg-white rounded px-8 pt-6 pb-8 mb-4 h-full border-4">
+          <p
+            data-testid="name-card"
+            className="block text-gray-700 font-bold mb-2 uppercase text-center"
+          >
+            {cardName}
 
-            </button>)
-        }
+          </p>
+          <img
+            src={ cardImage }
+            alt="Nome da carta"
+            data-testid="image-card"
+            className="block text-gray-700 font-bold mb-2 w-full h-64"
+          />
+          <p
+            data-testid="description-card"
+            className="block text-gray-700 font-bold mb-2 text-center"
+          >
+            {cardDescription}
+
+          </p>
+          <div>
+            <p
+              data-testid="attr1-card"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Força ------------
+              {cardAttr1}
+            </p>
+            <p
+              data-testid="attr2-card"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Velocidade ----
+              {cardAttr2}
+            </p>
+            <p
+              data-testid="attr3-card"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Inteligencia ---
+              {cardAttr3}
+            </p>
+          </div>
+          <p
+            data-testid="rare-card"
+            className="block text-gray-700 font-bold mb-2 capitalize"
+          >
+            { cardRare }
+
+          </p>
+          {cardTrunfo && (
+            <p
+              data-testid="trunfo-card"
+              className="block text-red-700 font-bold mb-2"
+            >
+              Super Trunfo
+
+            </p>
+          )}
+          {
+            removeCard && (
+              <button
+                data-testid="delete-button"
+                type="submit"
+                onClick={ () => removeCard(cardName) }
+                className="w-full p-5 bg-red-200"
+              >
+                Excluir
+              </button>)
+          }
+        </div>
       </main>
     );
   }
@@ -50,9 +103,5 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
-  removeCard: PropTypes.bool,
-};
-
-Card.defaultProps = {
-  removeCard: false,
+  removeCard: PropTypes.func.isRequired,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
@@ -172,7 +173,7 @@ class App extends React.Component {
       return storedCards;
     };
     return (
-      <div className="flex flex-wrap justify-center mt-20">
+      <div className="flex flex-wrap justify-center mt-20 w-9/12 mx-auto">
         <Form
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -197,35 +198,53 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <input
-          type="text"
-          data-testid="name-filter"
-          name="filterName"
-          value={ filterName }
-          onChange={ this.onInputChange }
-          disabled={ filterTrunfo }
-        />
-        <select
-          data-testid="rare-filter"
-          onChange={ this.onInputChange }
-          value={ filterRarity }
-          name="filterRarity"
-          disabled={ filterTrunfo }
-        >
-          <option value="normal"> Normal</option>
-          <option value="raro"> Raro</option>
-          <option value="muito raro"> Muito Raro</option>
-          <option value="todas"> Todas</option>
-        </select>
-        <label htmlFor="trunfo-input">
-          <input
-            type="checkbox"
-            data-testid="trunfo-filter"
-            onChange={ this.onInputChange }
-            name="filterTrunfo"
-            checked={ filterTrunfo }
-          />
-        </label>
+        <div className="w-full max-w-sm p-10">
+          <div className="shadown-md bg-white rounded px-8 pt-6 pb-8 mb-4">
+            <label
+              htmlFor="filterName"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              <input
+                type="text"
+                id="filterName"
+                data-testid="name-filter"
+                name="filterName"
+                value={ filterName }
+                onChange={ this.onInputChange }
+                disabled={ filterTrunfo }
+                placeholder="Filtre por Nome"
+                className="w-full text-center p-5"
+              />
+            </label>
+            <select
+              data-testid="rare-filter"
+              onChange={ this.onInputChange }
+              value={ filterRarity }
+              name="filterRarity"
+              disabled={ filterTrunfo }
+              className="w-full p-5 bg-gray-200"
+            >
+              <option value="normal"> Normal</option>
+              <option value="raro"> Raro</option>
+              <option value="muito raro"> Muito Raro</option>
+              <option value="todas"> Todas</option>
+            </select>
+            <label
+              htmlFor="trunfo-input"
+              className="block text-gray-700 font-bold mb-2 text-center"
+            >
+              SUPER TRUNFO
+              <input
+                type="checkbox"
+                data-testid="trunfo-filter"
+                onChange={ this.onInputChange }
+                name="filterTrunfo"
+                checked={ filterTrunfo }
+                className="ml-5 w-5 h-5 mt-2"
+              />
+            </label>
+          </div>
+        </div>
         {
           renderArray().map((card) => (
             <Card
